@@ -20,7 +20,11 @@ const fetchAllProfiles = (setAllProfiles) => {
     .catch((err) => console.log("something went wrong", err));
 };
 const fetchAllPrescriptions = (setAllPrescriptions) => {
-  fetch(apiUrl + `/prescriptions/`)
+  fetch(apiUrl + `/prescriptions/`, {
+    headers: {
+      "auth-token": localStorage.getItem("healthUser"),
+    },
+  })
     .then((res) => res.json())
     .then((data) => {
       setAllPrescriptions(data.prescriptions);
@@ -43,7 +47,7 @@ const handleNewUserSubmit = (
   setFormData,
   emptyFormData
 ) => {
-  fetch(`${apiUrl}/users`, {
+  fetch(`${apiUrl}/users/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -62,8 +66,8 @@ const handleNewUserSubmit = (
 };
 
 // User login: Calls fetch request to login
-const handleUserLoginSubmit = (formData, setFormData, emptyFormData) => {
-  fetch(`${apiUrl}/users`, {
+const handleUserLoginSubmit = (formData) => {
+  fetch(`${apiUrl}/users/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -71,8 +75,11 @@ const handleUserLoginSubmit = (formData, setFormData, emptyFormData) => {
       password: formData.password,
     }),
   })
-    .then(() => {
-      setFormData(emptyFormData);
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      localStorage.setItem("healthUser", json.token);
     })
     .catch((err) => console.log("something went wrong", err));
 };
@@ -147,7 +154,10 @@ const handleNewPrescriptionSubmit = (
 ) => {
   fetch(`${apiUrl}/prescriptions/`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": localStorage.getItem("healthUser"),
+    },
     body: JSON.stringify({
       prescriptionName: formData.prescriptionName,
       prescriptionDose: formData.prescriptionDose,

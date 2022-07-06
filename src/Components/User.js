@@ -42,6 +42,10 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
+    handleUserLoginSubmit({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
   };
 
   return (
@@ -97,7 +101,6 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={handleUserLoginSubmit}
             >
               Sign In
             </Button>
