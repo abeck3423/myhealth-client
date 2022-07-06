@@ -185,7 +185,10 @@ const handleEditPrescriptionSubmit = (
 ) => {
   fetch(`${apiUrl}/prescriptions/${dialogData._id}`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": localStorage.getItem("healthUser"),
+    },
     body: JSON.stringify({
       presciptionName: formData.presciptionName,
       prescriptionDose: formData.prescriptionDose,
@@ -223,7 +226,10 @@ const handleNewInsuranceSubmit = (
 ) => {
   fetch(`${apiUrl}/insurances/`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": localStorage.getItem("healthUser"),
+    },
     body: JSON.stringify({
       insuranceName: formData.insuranceName,
       insuranceID: formData.insuranceID,
