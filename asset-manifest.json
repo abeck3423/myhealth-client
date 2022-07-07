@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/myhealth-client/static/css/main.60b85714.css",
+    "main.js": "/myhealth-client/static/js/main.cae53aac.js",
+    "index.html": "/myhealth-client/index.html",
+    "main.60b85714.css.map": "/myhealth-client/static/css/main.60b85714.css.map",
+    "main.cae53aac.js.map": "/myhealth-client/static/js/main.cae53aac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.60b85714.css",
+    "static/js/main.cae53aac.js"
+  ]
+}
